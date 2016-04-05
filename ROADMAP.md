@@ -2,3 +2,6 @@
 
 ## v1.0
 1. Resource Presentation concern
+
+## v1.1
+1. Improved the Resource Presentation concern to support Keyword Argument

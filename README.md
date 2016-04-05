@@ -25,6 +25,6 @@ include Repres::Dosser::Concerns::ResourcePresentation
 
 def index
   self.criteria = { page: params[:page] }
-  render_ok [ { name: 'Topbit' }, { name: 'Roland' } ]
+  render_ok collection: [ { name: 'Topbit' }, { name: 'Roland' } ]
 end
 ```

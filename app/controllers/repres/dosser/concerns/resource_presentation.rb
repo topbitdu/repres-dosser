@@ -14,46 +14,46 @@ module Repres::Dosser::Concerns::ResourcePresentation
     attr_writer :criteria
 
     # 200
-    def render_ok(collection, size = collection.size, message = nil)
+    def render_ok(collection: [], success: true, code: self.class::CODE_SUCCESS, message: '成功', size: collection.size, errors: {})
       result = {
-        success:    true,
-        code:       self.class::CODE_SUCCESS,
-        message:    message||'成功。',
+        success:    success,
+        code:       code,
+        message:    message,
         collection: collection,
         size:       size,
-        errors:     {}
+        errors:     errors
       }
       respond_result :ok, result
     end
 
     # 201
-    def render_created(collection, size = collection.size, message = nil)
+    def render_created(collection: [], success: true, code: self.class::CODE_SUCCESS, message: '成功', size: collection.size, errors: {})
       result = {
-        success:    true,
-        code:       self.class::CODE_SUCCESS,
-        message:    message||'创建成功。',
+        success:    success,
+        code:       code,
+        message:    message,
         collection: collection,
         size:       size,
-        errors:     {}
+        errors:     errors
       }
       respond_result :created, result
     end
 
     # 400
-    def render_bad_request(errors, code = nil, message = nil, collection = [], size = 0)
+    def render_bad_request(success: false, code: self.class::CODE_FAILURE_WRONG_PARAMETER, message: '参数错误', collection: [], size: 0, errors: {})
       result = {
-        success:    false,
-        code:       code||self.class::CODE_FAILURE_WRONG_PARAMETER,
-        message:    message||'参数出错。',
+        success:    success,
+        code:       code,
+        message:    message,
         collection: collection,
         size:       size,
         errors:     errors
       }
       respond_result :bad_request, result
     end
-
+=begin
     # 400 bad request - blank parameter
-    def render_blank_parameter(parameter_name)
+    def render_blank_parameter(success: false, code: self.class::CODE_FAILURE_WRONG_PARAMETER, message: '参数', parameter_name)
       result = {
         success:    false,
         code:       self.class::CODE_FAILURE_WRONG_PARAMETER,
@@ -64,20 +64,20 @@ module Repres::Dosser::Concerns::ResourcePresentation
       }
       respond_result :bad_request, result
     end
-
+=end
     # 404
-    def render_not_found(errors, message = nil, collection = [], size = 0)
+    def render_not_found(success: false, code: self.class::CODE_FAILURE_NOT_FOUND, message: '没有找到符合条件的信息', collection: [], size: 0, errors: {})
       result = {
-        success:    false,
-        code:       self.class::CODE_FAILURE_NOT_FOUND,
-        message:    message||'没有找到符合条件的信息。',
+        success:    success,
+        code:       code,
+        message:    message,
         collection: collection,
         size:       size,
         errors:     errors
       }
       respond_result :not_found, result
     end
-
+=begin
     # 404 not found - inexistent
     def render_inexistent(parameter_name, message)
       result = {
@@ -90,12 +90,12 @@ module Repres::Dosser::Concerns::ResourcePresentation
       }
       respond_result :not_found, result
     end
-
+=end
     # 409
-    def render_conflict(errors, message, collection = [], size = 0)
+    def render_conflict(success: false, code: self.class::CODE_FAILURE_WRONG_STATE, message: '', collection: [], size: 0, errors: {})
       result = {
-        success:    false,
-        code:       self.class::CODE_FAILURE_WRONG_STATE,
+        success:    success,
+        code:       code,
         message:    message,
         collection: collection,
         size:       size,
@@ -105,16 +105,20 @@ module Repres::Dosser::Concerns::ResourcePresentation
     end
 
     # 409 conflict - wrong parameter
-    def render_wrong_parameter(errors, message, collection = [], size = 0)
+    def render_wrong_parameter(success: false, code: self.class::CODE_FAILURE_WRONG_PARAMETER, message: '', collection: [], size: 0, errors: {})
       result = {
-        success:    false,
-        code:       self.class::CODE_FAILURE_WRONG_PARAMETER,
+        success:    success,
+        code:       code,
         message:    message,
         collection: collection,
         size:       size,
         errors:     errors
       }
       respond_result :conflict, result
+    end
+
+    def render_internal_server_error(success: false, code: self.class::CODE_FAILURE, message: '出现临时网络故障，请稍后重试。', collection: [], size: 0, errors: {})
+      respond_result :conflict, success: success, code: code, message: message, collection: collection, size: size, errors: errors
     end
 
     def respond_result(status, result)
