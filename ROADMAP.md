@@ -5,3 +5,6 @@
 
 ## v1.1
 1. Improved the Resource Presentation concern to support Keyword Argument
+
+## v1.2
+1. Improved the Resource Presentation concern to add .meta.timestamp attribute in the response

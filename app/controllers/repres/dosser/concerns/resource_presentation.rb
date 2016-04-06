@@ -122,7 +122,7 @@ module Repres::Dosser::Concerns::ResourcePresentation
     end
 
     def respond_result(status, result)
-      result[:meta] = { request_id: request.uuid, criteria: @criteria }
+      result[:meta] = { criteria: @criteria, request_id: request.uuid, timestamp: Time.now.to_i }
       respond_to do |format|
         format.json do render status: status, json: result end
         format.xml  do render status: status, xml:  result end
