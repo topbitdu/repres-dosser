@@ -8,3 +8,9 @@
 
 ## v1.2
 1. Improved the Resource Presentation concern to add .meta.timestamp attribute in the response
+
+## v1.3
+1. Improved the Resource Presentation concern to support the following status codes: 401 Unauthorized, and 403 Forbidden
+
+## v1.4
+1. Improved the Resource Presentation concern to support the following status codes: 204 No Content
