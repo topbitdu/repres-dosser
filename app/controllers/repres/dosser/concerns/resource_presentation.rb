@@ -5,6 +5,7 @@ module Repres::Dosser::Concerns::ResourcePresentation
   CODE_SUCCESS = 'success'.freeze
   CODE_FAILURE = 'failure'.freeze
 
+  CODE_FAILURE_FORBIDDEN       = 'failure-forbidden'.freeze
   CODE_FAILURE_NOT_FOUND       = 'failure-not-found'.freeze
   CODE_FAILURE_WRONG_PARAMETER = 'failure-wrong-parameter'.freeze
   CODE_FAILURE_WRONG_STATE     = 'failure-wrong-state'.freeze
@@ -13,70 +14,131 @@ module Repres::Dosser::Concerns::ResourcePresentation
 
     attr_writer :criteria
 
+    # https://httpstatuses.com/
+    # http://www.restapitutorial.com/httpstatuscodes.html
+    # http://guides.rubyonrails.org/layouts_and_rendering.html#the-status-option
+
     # 200
-    def render_ok(collection: [], success: true, code: self.class::CODE_SUCCESS, message: '成功', size: collection.size, errors: {})
-      result = {
+    def render_ok(
+      success:    true,
+      code:       self.class::CODE_SUCCESS,
+      message:    '成功',
+      collection: [],
+      size:       collection.size,
+      errors:     {})
+      respond_result :ok,
         success:    success,
         code:       code,
         message:    message,
         collection: collection,
         size:       size,
         errors:     errors
-      }
-      respond_result :ok, result
     end
 
     # 201
-    def render_created(collection: [], success: true, code: self.class::CODE_SUCCESS, message: '成功', size: collection.size, errors: {})
-      result = {
+    def render_created(
+      success:    true,
+      code:       self.class::CODE_SUCCESS,
+      message:    '成功',
+      collection: [],
+      size:       collection.size,
+      errors:     {})
+      respond_result :created,
         success:    success,
         code:       code,
         message:    message,
         collection: collection,
         size:       size,
         errors:     errors
-      }
-      respond_result :created, result
     end
 
-    # 400
-    def render_bad_request(success: false, code: self.class::CODE_FAILURE_WRONG_PARAMETER, message: '参数错误', collection: [], size: 0, errors: {})
-      result = {
+=begin
+    # 204
+    def render_no_content(
+      success:    true,
+      code:       self.class::CODE_SUCCESS,
+      message:    '成功',
+      collection: [],
+      size:       collection.size,
+      errors:     {})
+      respond_result :no_content,
         success:    success,
         code:       code,
         message:    message,
         collection: collection,
         size:       size,
         errors:     errors
-      }
-      respond_result :bad_request, result
-    end
-=begin
-    # 400 bad request - blank parameter
-    def render_blank_parameter(success: false, code: self.class::CODE_FAILURE_WRONG_PARAMETER, message: '参数', parameter_name)
-      result = {
-        success:    false,
-        code:       self.class::CODE_FAILURE_WRONG_PARAMETER,
-        message:    "#{parameter_name}参数不能为空。",
-        collection: [],
-        size:       0,
-        errors:     { parameter_name => [ '不能为空' ] }
-      }
-      respond_result :bad_request, result
     end
 =end
-    # 404
-    def render_not_found(success: false, code: self.class::CODE_FAILURE_NOT_FOUND, message: '没有找到符合条件的信息', collection: [], size: 0, errors: {})
-      result = {
+
+    # 400
+    def render_bad_request(
+      success:    false,
+      code:       self.class::CODE_FAILURE_WRONG_PARAMETER,
+      message:    '参数错误',
+      collection: [],
+      size:       collection.size,
+      errors:     {})
+      respond_result :bad_request,
         success:    success,
         code:       code,
         message:    message,
         collection: collection,
         size:       size,
         errors:     errors
-      }
-      respond_result :not_found, result
     end
+
+    # 401
+    def render_unauthorized(
+      success:    false,
+      code:       self.class::CODE_FAILURE,
+      message:    '请先登录',
+      collection: [],
+      size:       collection.size,
+      errors:     {})
+      respond_result :unauthorized,
+        success:    success,
+        code:       code,
+        message:    message,
+        collection: collection,
+        size:       size,
+        errors:     errors
+    end
+
+    # 403 forbidden
+    def render_forbidden(
+      success:    false,
+      code:       self.class::CODE_FAILURE_FORBIDDEN,
+      message:    '无权访问',
+      collection: [],
+      size:       collection.size,
+      errors:     {})
+      respond_result :forbidden,
+        success:    success,
+        code:       code,
+        message:    message,
+        collection: collection,
+        size:       size,
+        errors:     errors
+    end
+
+    # 404
+    def render_not_found(
+      success:    false,
+      code:       self.class::CODE_FAILURE_NOT_FOUND,
+      message:    '没有找到符合条件的信息',
+      collection: [],
+      size:       collection.size,
+      errors:     {})
+      respond_result :not_found,
+        success:    success,
+        code:       code,
+        message:    message,
+        collection: collection,
+        size:       size,
+        errors:     errors
+    end
+
 =begin
     # 404 not found - inexistent
     def render_inexistent(parameter_name, message)
@@ -91,19 +153,25 @@ module Repres::Dosser::Concerns::ResourcePresentation
       respond_result :not_found, result
     end
 =end
+
     # 409
-    def render_conflict(success: false, code: self.class::CODE_FAILURE_WRONG_STATE, message: '', collection: [], size: 0, errors: {})
-      result = {
+    def render_conflict(
+      success:    false,
+      code:       self.class::CODE_FAILURE_WRONG_STATE,
+      message:    '',
+      collection: [],
+      size:       collection.size,
+      errors:     {})
+      respond_result :conflict,
         success:    success,
         code:       code,
         message:    message,
         collection: collection,
         size:       size,
         errors:     errors
-      }
-      respond_result :conflict, result
     end
 
+=begin
     # 409 conflict - wrong parameter
     def render_wrong_parameter(success: false, code: self.class::CODE_FAILURE_WRONG_PARAMETER, message: '', collection: [], size: 0, errors: {})
       result = {
@@ -116,9 +184,22 @@ module Repres::Dosser::Concerns::ResourcePresentation
       }
       respond_result :conflict, result
     end
+=end
 
-    def render_internal_server_error(success: false, code: self.class::CODE_FAILURE, message: '出现临时网络故障，请稍后重试。', collection: [], size: 0, errors: {})
-      respond_result :conflict, success: success, code: code, message: message, collection: collection, size: size, errors: errors
+    def render_internal_server_error(
+      success:    false,
+      code:       self.class::CODE_FAILURE,
+      message:    '出现临时网络故障，请稍后重试。',
+      collection: [],
+      size:       collection.size,
+      errors:     {})
+      respond_result :internal_server_error,
+        success:    success,
+        code:       code,
+        message:    message,
+        collection: collection,
+        size:       size,
+        errors:     errors
     end
 
     def respond_result(status, result)
