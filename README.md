@@ -28,3 +28,13 @@ def index
   render_ok collection: [ { name: 'Topbit' }, { name: 'Roland' } ]
 end
 ```
+
+The following responding methods are supported:
+- 200 render_ok
+- 201 render_created
+- 400 render_bad_request
+- 401 render_unauthorized
+- 403 render_forbidden
+- 404 render_not_found
+- 409 render_conflict
+- 500 render_internal_server_error
