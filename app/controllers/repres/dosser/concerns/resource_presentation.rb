@@ -186,6 +186,7 @@ module Repres::Dosser::Concerns::ResourcePresentation
     end
 =end
 
+    # 500
     def render_internal_server_error(
       success:    false,
       code:       self.class::CODE_FAILURE,
