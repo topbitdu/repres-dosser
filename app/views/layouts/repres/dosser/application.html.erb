@@ -3,12 +3,13 @@
 <head>
   <title>Repres Dosser</title>
   <%= stylesheet_link_tag    "dosser/application", media: "all" %>
-  <%= javascript_include_tag "dosser/application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 <%= yield %>
+
+<%= javascript_include_tag "dosser/application" %>
 
 </body>
 </html>
