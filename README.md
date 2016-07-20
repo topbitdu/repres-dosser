@@ -32,6 +32,7 @@ end
 The following responding methods are supported:
 - 200 render_ok
 - 201 render_created
+- 204 render_no_content
 - 400 render_bad_request
 - 401 render_unauthorized
 - 403 render_forbidden

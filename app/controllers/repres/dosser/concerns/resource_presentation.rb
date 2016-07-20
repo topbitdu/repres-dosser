@@ -52,7 +52,6 @@ module Repres::Dosser::Concerns::ResourcePresentation
         errors:     errors
     end
 
-=begin
     # 204
     def render_no_content(
       success:    true,
@@ -69,7 +68,6 @@ module Repres::Dosser::Concerns::ResourcePresentation
         size:       size,
         errors:     errors
     end
-=end
 
     # 400
     def render_bad_request(
