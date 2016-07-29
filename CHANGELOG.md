@@ -14,3 +14,6 @@
 
 ## v1.4
 1. Improved the Resource Presentation concern to support the following status codes: 204 No Content
+
+## v1.4.1
+1. Improved the Ruby Gem Specification to support Rails v5.0

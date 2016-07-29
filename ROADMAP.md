@@ -15,5 +15,8 @@
 ## v1.4
 1. Improve the Resource Presentation concern to support the following status codes: 204 No Content
 
+## v1.4.1
+1. Improve the Ruby Gem Specification to support Rails v5.0
+
 ## v1.5
 1. Improve the Resource Presentation concern to add .meta.pagination attribute in the response
