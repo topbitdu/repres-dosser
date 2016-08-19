@@ -1,5 +1,5 @@
 module Repres
   module Dosser
-    VERSION = '1.4.1'.freeze
+    VERSION = '1.5'.freeze
   end
 end

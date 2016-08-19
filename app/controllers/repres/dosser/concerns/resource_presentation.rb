@@ -10,7 +10,7 @@ module Repres::Dosser::Concerns::ResourcePresentation
   CODE_FAILURE_WRONG_PARAMETER = 'failure-wrong-parameter'.freeze
   CODE_FAILURE_WRONG_STATE     = 'failure-wrong-state'.freeze
 
-  self.included do |includer|
+  included do |includer|
 
     attr_writer :criteria
 
@@ -201,8 +201,28 @@ module Repres::Dosser::Concerns::ResourcePresentation
         errors:     errors
     end
 
+    def paginate(total_items: 0, per_page: 0, current_page: 1)
+      total_items  = total_items.to_i
+      per_page     = per_page.to_i
+      current_page = current_page.to_i
+
+      raise ArgumentError.new('The total_items argument should be a positive integer.') if total_items<=0
+      raise ArgumentError.new('The per_page argument should be a positive integer.')    if per_page<=0
+
+      current_page = 1 if current_page<=0
+      total_pages  = total_items/per_page+(total_items%per_page>0 ? 1 : 0)
+      current_page = [ current_page, total_pages ].min
+      min_item_on_current_page = per_page*(current_page-1)+1
+      max_item_on_current_page = [ per_page*current_page, total_items ].min
+      items_on_current_page    = max_item_on_current_page-min_item_on_current_page+1
+
+      @pagination = { total_items: total_items, per_page: per_page, current_page: current_page, total_pages: total_pages, min_item_on_current_page: min_item_on_current_page, max_item_on_current_page: max_item_on_current_page, items_on_current_page: items_on_current_page }
+
+    end
+
     def respond_result(status, result)
       result[:meta] = { criteria: @criteria, request_id: request.uuid, timestamp: Time.now.to_i }
+      result[:meta][:pagination] = @pagination if @pagination.present?
       respond_to do |format|
         format.json do render status: status, json: result end
         format.xml  do render status: status, xml:  result end

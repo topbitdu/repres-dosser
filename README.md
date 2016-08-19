@@ -39,3 +39,26 @@ The following responding methods are supported:
 - 404 render_not_found
 - 409 render_conflict
 - 500 render_internal_server_error
+
+### Pagination
+```ruby
+include Repres::Dosser::Concerns::ResourcePresentation
+
+paginate total_items: 108, per_page: 10, current_page: 2
+# The pagination will be added into the meta of the response body.
+```
+
+```javascript
+onIndexResourceSuccess: function(data, textStatus, jqXHR)
+{
+  var pagination = data.meta.pagination;
+  console.info('Here are '+pagination.total_items+' items totally.');
+  console.info('Ideally '+pagination.per_page+' items on each page.');
+  console.info('The current page is '+pagination.current_page+'.');
+  // If the required current_page is greater than the total_pages, the current_page is changed to be equal the total_pages.
+  // If the required current_page is less than 1, the current_page is changed to 1. The current_page starts from 1.
+  console.info('Here are '+pagination.total_pages+' pages totally.');
+  console.info('Here are '+pagination.items_on_current_pages+' items on the current page.');
+  console.info('The item index is from '+pagination.min_item_on_current_page+' to '+pagination.max_item_on_current_page+' on the current page.');
+}
+```

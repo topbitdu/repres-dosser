@@ -17,3 +17,6 @@
 
 ## v1.4.1
 1. Improved the Ruby Gem Specification to support Rails v5.0
+
+## v1.5
+1. Improved the Resource Presentation concern to add .meta.pagination attribute in the response
