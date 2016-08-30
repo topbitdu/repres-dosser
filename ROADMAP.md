@@ -20,3 +20,6 @@
 
 ## v1.5
 1. Improve the Resource Presentation concern to add .meta.pagination attribute in the response
+
+## v1.6
+1. Swagger generator
