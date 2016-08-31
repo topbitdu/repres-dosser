@@ -1,0 +1,118 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title":       "PlatformModuleName Web API",
+    "description": "PlatformModuleName RESTful Web API version_name",
+    "contact":     { "name": "Your Name", "email": "user@company.com" },
+    "version":     "version_number"
+  },
+  "schemes":  [ "https", "http" ],
+  "basePath": "/platform_name-api/version_name",
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths":    {
+
+
+
+    "/portals/~": {
+      "get": {
+        "summary":     "Platform Portal",
+        "description": "The Mobile client or Browsers should access this Web API before get the links of the other resources.",
+        "tags":        [ "元数据" ],
+        "parameters":  [
+          {
+            "name":        "open_id",
+            "in":          "query",
+            "description": "Open ID of the current user",
+            "required":    false,
+            "type":        "string",
+            "format":      "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "移动端应用获取其他Web API链接的返回。",
+            "schema":      { "$ref": "#/definitions/LoadPortalResponseBody" }
+          },
+          "default": {
+            "description": "出现错误。",
+            "schema":      { "$ref": "#/definitions/ErrorResponseBody" }
+          }
+        }
+      }
+    }
+
+
+
+  },
+
+  "definitions": {
+
+    "Date":   { "type": "string",  "format": "date"  },
+    "Second": { "type": "integer", "format": "int64" },
+
+    "LinkList": { "type":  "array", "items": { "type": "object", "properties": { "rel":  { "type": "string" }, "href": { "type": "string" }, "title": { "type": "string" } } } },
+
+    "ResponseBodyCommonProperties": {
+      "type": "object",
+      "properties": {
+
+        "success": { "type": "boolean"                    },
+        "code":    { "type": "string"                     },
+        "message": { "type": "string"                     },
+        "size":    { "type": "integer", "format": "int32" },
+        "errors":  { "type": "string",  "additionalProperties": { "type": "array", "items": { "type": "string" } } },
+
+        "meta": {
+          "type": "object",
+          "properties": {
+            "timestamp":  { "type": "integer", "format":               "int32"              },
+            "request_id": { "type": "string",  "format":               "uuid"               },
+            "criteria":   { "type": "object",  "additionalProperties": { "type": "string" } },
+            "pagination": { "type": "object",
+              "properties": {
+                "total_items":              { "type": "integer", "format": "int32" },
+                "per_page":                 { "type": "integer", "format": "int32" },
+                "current_page":             { "type": "integer", "format": "int32" },
+                "total_pages":              { "type": "integer", "format": "int32" },
+                "min_item_on_current_page": { "type": "integer", "format": "int32" },
+                "max_item_on_current_page": { "type": "integer", "format": "int32" },
+                "items_on_current_page":    { "type": "integer", "format": "int32" }
+              }
+            }
+          }
+        }
+
+      }
+    },
+
+    "ErrorResponseBody": {
+      "description": "出现错误时的响应体",
+      "allOf": [
+        { "$ref": "#/definitions/ResponseBodyCommonProperties" },
+        { "type": "object", "properties": { "collection": { "type": "array", "items": { "type": "object",  "additionalProperties": { "type": "string" } } } } }
+      ]
+    },
+
+
+
+    "LoadPortalResponseBody": {
+      "description": "元数据的响应体",
+      "allOf": [
+        { "$ref": "#/definitions/ResponseBodyCommonProperties" },
+        { "type": "object", "properties": { "collection": { "type": "array", "items": { "$ref": "#/definitions/LoadPortalResponseItem" } } } }
+      ]
+    },
+
+    "LoadPortalResponseItem": {
+      "type": "object",
+      "properties": {
+        "name":  { "type": "string" },
+        "links": { "$ref": "#/definitions/LinkList" }
+      }
+    }
+
+
+
+  }
+}

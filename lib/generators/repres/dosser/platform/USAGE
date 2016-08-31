@@ -1,0 +1,18 @@
+Description:
+
+    Generates the Dosser platform scaffold.
+
+Example:
+
+    rails generate repres:dosser:platform administration --version 2
+
+    This will insert the following routings into the config/routes.rb file:
+
+        scope '/administration-api/v2', module: 'administration/dosser/v2', as: 'administration_dosser_v2' do
+          resources :portals, only: :show
+        end
+
+    and create the following files:
+
+        app/controllers/administration/dosser/v2/presentation_controller.rb
+        app/controllers/administration/dosser/v2/portals_controller.rb

@@ -62,3 +62,46 @@ onIndexResourceSuccess: function(data, textStatus, jqXHR)
   console.info('The item index is from '+pagination.min_item_on_current_page+' to '+pagination.max_item_on_current_page+' on the current page.');
 }
 ```
+
+
+
+## Generators
+
+
+
+### Platform generator
+
+```shell
+rails generate repres:dosser:platform administration --version 2
+```
+
+This will insert the following routings into the config/routes.rb file:
+```ruby
+scope '/administration-api/v2', module: 'administration/dosser/v2', as: 'administration_dosser_v2' do
+  resources :portals, only: :show
+end
+```
+
+and create the following files:
+```shell
+app/controllers/administration/dosser/v2/presentation_controller.rb
+app/controllers/administration/dosser/v2/portals_controller.rb
+```
+
+
+
+### Swagger generator
+
+```shell
+rails generate repres:dosser:swagger administration --version 2
+```
+
+This will call the following command:
+```shell
+rails generate repres:dosser:platform administration --version 2
+```
+
+before insert the swagger_engine & the latest repres-dosser gem into the Gemfile file and will create the following file:
+```shell
+lib/swagger/administration_api_v2.json
+```

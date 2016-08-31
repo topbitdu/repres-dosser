@@ -1,0 +1,15 @@
+Description:
+
+    Generates the Dosser Swagger scaffold.
+
+Example:
+
+    rails generate repres:dosser:swagger administration --version 2
+
+    This will call the following command:
+
+        rails generate repres:dosser:platform administration --version 2
+
+    before insert the swagger_engine & the latest repres-dosser gem into the Gemfile file and will create the following file:
+
+        lib/swagger/administration_api_v2.json

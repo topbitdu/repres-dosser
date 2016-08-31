@@ -22,4 +22,5 @@
 1. Improve the Resource Presentation concern to add .meta.pagination attribute in the response
 
 ## v1.6
-1. Swagger generator
+1. Platform generator
+2. Swagger generator
