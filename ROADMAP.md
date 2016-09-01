@@ -24,3 +24,6 @@
 ## v1.6
 1. Platform generator
 2. Swagger generator
+
+## v1.6.1
+1. Improve the Swagger generator for the ``config/initializers/swagger_engine.rb`` file
