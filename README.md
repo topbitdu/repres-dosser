@@ -103,5 +103,6 @@ rails generate repres:dosser:platform administration --version 2
 
 before insert the swagger_engine & the latest repres-dosser gem into the Gemfile file and will create the following file:
 ```shell
+config/initializers/swagger_engine.rb
 lib/swagger/administration_api_v2.json
 ```
