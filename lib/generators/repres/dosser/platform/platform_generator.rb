@@ -47,7 +47,6 @@ class Repres::Dosser::PlatformGenerator < Rails::Generators::NamedBase
 
   # Administration
   def platform_module_name
-    #@platform_name.capitalize
     @platform_name.camelize
   end
 
