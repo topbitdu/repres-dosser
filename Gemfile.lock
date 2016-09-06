@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    repres-dosser (1.6)
+    repres-dosser (1.6.1)
       rails (>= 4.2)
 
 GEM
