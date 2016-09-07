@@ -27,3 +27,6 @@
 
 ## v1.6.1
 1. Improve the Swagger generator for the ``config/initializers/swagger_engine.rb`` file
+
+## v1.6.2
+1. Improve the Platform generator for the templates

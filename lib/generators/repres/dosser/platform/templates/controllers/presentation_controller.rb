@@ -1,6 +1,6 @@
 require 'unidom'
 
-class PlatformModuleName::Dosser::VersionModuleName::PresentationController < ActionController::Base
+class <%= @platform_module_name %>::Dosser::<%= @version_module_name %>::PresentationController < ActionController::Base
 
   clear_helpers
 
