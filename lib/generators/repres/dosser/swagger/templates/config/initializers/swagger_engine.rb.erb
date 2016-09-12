@@ -1,0 +1,10 @@
+SwaggerEngine.configure do |config|
+
+  config.admin_username = ENV['<%= @application_name_const %>_SWAGGER_USERNAME']||'swagger'
+  config.admin_password = ENV['<%= @application_name_const %>_SWAGGER_PASSWORD']||'<%= @application_name %>'
+
+  config.json_files = {
+    '<%= @platform_module_name %> API <%= @version_name %>': 'lib/swagger/<%= @platform_name %>_api_<%= @version_name %>.json'
+  }
+
+end

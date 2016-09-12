@@ -9,8 +9,6 @@ class Repres::Dosser::PlatformGenerator < Rails::Generators::NamedBase
 
   def produce
 
-    @platform_name  = file_name.downcase
-    @version_number = options['version'].to_i
     bind_options
 
     generate_controller
@@ -19,6 +17,8 @@ class Repres::Dosser::PlatformGenerator < Rails::Generators::NamedBase
   end
 
   def bind_options
+    @platform_name        = file_name.downcase
+    @version_number       = options['version'].to_i
     @platform_module_name = @platform_name.camelize
     @version_module_name  = "V#{@version_number}"
     @version_name         = "v#{@version_number}"
@@ -26,12 +26,13 @@ class Repres::Dosser::PlatformGenerator < Rails::Generators::NamedBase
 
   # controller
   #
-  #   app/controllers/platform/version/presentation_controller.rb
-  #   app/controllers/platform/version/portals_controller.rb
+  #   app/controllers/{platform}/dosser/{version}/presentation_controller.rb
+  #   app/controllers/{platform}/dosser/{version}/portals_controller.rb
   #
   def generate_controller
-    template 'controllers/portals_controller.rb',      "app/controllers/#{@platform_name}/dosser/#{@version_name}/portals_controller.rb"
-    template 'controllers/presentation_controller.rb', "app/controllers/#{@platform_name}/dosser/#{@version_name}/presentation_controller.rb"
+    empty_directory "app/controllers/#{@platform_name}/dosser/#{@version_name}"
+    template 'app/controllers/portals_controller.rb.erb',      "app/controllers/#{@platform_name}/dosser/#{@version_name}/portals_controller.rb"
+    template 'app/controllers/presentation_controller.rb.erb', "app/controllers/#{@platform_name}/dosser/#{@version_name}/presentation_controller.rb"
   end
 
   # route
@@ -39,11 +40,11 @@ class Repres::Dosser::PlatformGenerator < Rails::Generators::NamedBase
   #   config/routes.rb
   #
   def generate_route
-    source  = File.expand_path find_in_source_paths('routes.rb')
+    source  = File.expand_path find_in_source_paths('config/routes.rb.erb')
     content = ERB.new(File.binread(source).strip, nil, '-', "@output_buffer").result instance_eval('binding')
     route content
   end
 
-  private :bind_options,   :generate_controller,  :generate_route
+  private :bind_options, :generate_controller, :generate_route
 
 end

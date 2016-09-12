@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title":       "PlatformModuleName Web API",
-    "description": "PlatformModuleName RESTful Web API version_name",
+    "title":       "<%= @platform_module_name %> Web API",
+    "description": "<%= @platform_module_name %> RESTful Web API <%= @version_name %>",
     "contact":     { "name": "Your Name", "email": "user@company.com" },
-    "version":     "version_number"
+    "version":     "<%= @version_number %>"
   },
   "schemes":  [ "https", "http" ],
-  "basePath": "/platform_name-api/version_name",
+  "basePath": "/<%= @platform_name %>-api/<%= @version_name %>",
   "produces": [ "application/json" ],
   "consumes": [ "application/json" ],
   "paths":    {

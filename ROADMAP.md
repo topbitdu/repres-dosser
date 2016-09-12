@@ -30,3 +30,7 @@
 
 ## v1.6.2
 1. Improve the Platform generator for the templates
+
+## v1.6.3
+1. Improve the Swagger generator to generate the routing for the Swagger Engine
+2. Improve the Platform generator & the Swagger generator for the templates

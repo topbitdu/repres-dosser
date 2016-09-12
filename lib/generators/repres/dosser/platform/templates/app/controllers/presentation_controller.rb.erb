@@ -1,4 +1,4 @@
-require 'unidom'
+#require 'unidom'
 
 class <%= @platform_module_name %>::Dosser::<%= @version_module_name %>::PresentationController < ActionController::Base
 
@@ -8,10 +8,10 @@ class <%= @platform_module_name %>::Dosser::<%= @version_module_name %>::Present
 
   layout nil
 
-  before_action :load_unidom
+  #before_action :load_unidom
 
-  def load_unidom
-    initialize_unidom
-  end
+  #def load_unidom
+  #  initialize_unidom
+  #end
 
 end

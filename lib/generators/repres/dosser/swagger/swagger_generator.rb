@@ -9,30 +9,25 @@ class Repres::Dosser::SwaggerGenerator < Rails::Generators::NamedBase
 
   def produce
 
-    @platform_name  = file_name.downcase
-    @version_number = options['version'].to_i
+    bind_options
 
     generate 'repres:dosser:platform', "#{@platform_name} --version #{@version_number}"
 
     generate_gemfile
     generate_initializer
     generate_swagger
+    generate_route
 
   end
 
-  def define_platform_namespace(content)
-    content.gsub! /PlatformModuleName/, platform_module_name
-    content.gsub! /VersionModuleName/,  version_module_name
-    content.gsub! /platform_name/,      platform_name
-    content.gsub! /version_name/,       version_name
-    content.gsub! /version_number/,     version_number.to_s
-    content
-  end
-
-  def define_swagger_engine(content)
-    content.gsub! /APPLICATION_NAME/, application_name.upcase
-    content.gsub! /application_name/, application_name
-    define_platform_namespace content
+  def bind_options
+    @platform_name          = file_name.downcase
+    @version_number         = options['version'].to_i
+    @platform_module_name   = @platform_name.camelize
+    @version_module_name    = "V#{@version_number}"
+    @version_name           = "v#{@version_number}"
+    @application_name       = application_name
+    @application_name_const = application_name.upcase
   end
 
   # gemfile
@@ -41,7 +36,6 @@ class Repres::Dosser::SwaggerGenerator < Rails::Generators::NamedBase
   #
   def generate_gemfile
     gem 'swagger_engine'
-    gem 'repres-dosser', ">= #{Repres::Dosser::VERSION}"
   end
 
   # initializer
@@ -49,12 +43,10 @@ class Repres::Dosser::SwaggerGenerator < Rails::Generators::NamedBase
   #   config/initializers/swagger_engine.rb
   #
   def generate_initializer
-    copy_file('config/initializers/swagger_engine.rb') { |content| define_swagger_engine content }
-    file = Rails.root.join('config', 'initializers', 'swagger_engine.rb')
+    template 'config/initializers/swagger_engine.rb.erb', 'config/initializers/swagger_engine.rb'
 
-    line = "'PlatformModuleName API version_name': 'lib/swagger/platform_name_api_version_name.json'"
-    line = define_platform_namespace line
-
+    line = "'#{@platform_module_name} API #{@version_name}': 'lib/swagger/#{@platform_name}_api_#{@version_name}.json'"
+    file = Rails.root.join 'config', 'initializers', 'swagger_engine.rb'
     if :invoke==behavior
       puts "Please make sure the following line is in the file #{file}:\n\n    #{line}\n\n"
     elsif :revoke==behavior
@@ -65,45 +57,22 @@ class Repres::Dosser::SwaggerGenerator < Rails::Generators::NamedBase
 
   # swagger
   #
-  #   lib/swagger/administration_api_v1.json
+  #   lib/swagger/{platform}_api_{version}.json
   #
   def generate_swagger
-    copy_file('lib/swagger/api.json', "lib/swagger/#{platform_name}_api_#{version_name}.json") { |content| define_platform_namespace content }
+    template 'lib/swagger/api.json.erb', "lib/swagger/#{@platform_name}_api_#{@version_name}.json"
   end
 
-  # Administration
-  def platform_module_name
-    @platform_name.camelize
+  # route
+  #
+  #   config/routes.rb
+  #
+  def generate_route
+    source  = File.expand_path find_in_source_paths('config/routes.rb.erb')
+    content = ERB.new(File.binread(source).strip, nil, '-', "@output_buffer").result instance_eval('binding')
+    route content
   end
 
-  # administration
-  def platform_name
-    @platform_name
-  end
-
-  # Administration::V1
-  def platform_version_module_name
-    "#{platform_module_name}::Dosser::#{version_module_name}"
-  end
-
-  # V1
-  def version_module_name
-    "V#{version_number}"
-  end
-
-  # v1
-  def version_name
-    "v#{version_number}"
-  end
-
-  # 1
-  def version_number
-    @version_number
-  end
-
-  private :define_platform_namespace,             :define_swagger_engine,
-    :generate_gemfile,     :generate_initializer, :generate_swagger,
-    :platform_module_name, :platform_name,        :platform_version_module_name,
-    :version_module_name,  :version_name,         :version_number
+  private :generate_gemfile, :generate_initializer, :generate_swagger, :generate_route
 
 end
