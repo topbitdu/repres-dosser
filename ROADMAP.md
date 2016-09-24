@@ -34,3 +34,6 @@
 ## v1.6.3
 1. Improve the Swagger generator to generate the routing for the Swagger Engine
 2. Improve the Platform generator & the Swagger generator for the templates
+
+## v1.7
+1. Improve the Resource Presentation concern to support the following status codes: 202 Accepted
