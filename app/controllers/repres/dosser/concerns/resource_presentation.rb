@@ -52,6 +52,23 @@ module Repres::Dosser::Concerns::ResourcePresentation
         errors:     errors
     end
 
+    # 202
+    def render_accepted(
+      success:    true,
+      code:       self.class::CODE_SUCCESS,
+      message:    '已接受',
+      collection: [],
+      size:       collection.size,
+      errors:     {})
+      respond_result :accepted,
+        success:    success,
+        code:       code,
+        message:    message,
+        collection: collection,
+        size:       size,
+        errors:     errors
+    end
+
     # 204
     def render_no_content(
       success:    true,
@@ -168,21 +185,6 @@ module Repres::Dosser::Concerns::ResourcePresentation
         size:       size,
         errors:     errors
     end
-
-=begin
-    # 409 conflict - wrong parameter
-    def render_wrong_parameter(success: false, code: self.class::CODE_FAILURE_WRONG_PARAMETER, message: '', collection: [], size: 0, errors: {})
-      result = {
-        success:    success,
-        code:       code,
-        message:    message,
-        collection: collection,
-        size:       size,
-        errors:     errors
-      }
-      respond_result :conflict, result
-    end
-=end
 
     # 500
     def render_internal_server_error(
