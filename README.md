@@ -2,6 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](http://opensource.org/licenses/MIT)
 [![Gem Version](https://badge.fury.io/rb/repres-dosser.svg)](https://badge.fury.io/rb/repres-dosser)
+[![Dependency Status](https://gemnasium.com/badges/github.com/topbitdu/repres-dosser.svg)](https://gemnasium.com/github.com/topbitdu/repres-dosser)
 
 Repres (REsource PRESentation) is a series of resource presentation engines. The Dosser (DOmain-Specific SEmantic Representation) resource presentation engine includes JSON and XML resource presentation templates.
 Repres (资源表现)是一系列的资源表现引擎。Dosser (领域特定语意表现) 资源表现引擎包括JSON和XML表现模版。
