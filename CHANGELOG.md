@@ -29,7 +29,7 @@
 1. Improved the Swagger generator for the ``config/initializers/swagger_engine.rb`` file
 
 ## v1.6.2
-1. Improve the Platform generator for the templates
+1. Improved the Platform generator for the templates
 
 ## v1.6.3
 1. Improved the Swagger generator to generate the routing for the Swagger Engine
