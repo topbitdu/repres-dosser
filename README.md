@@ -54,6 +54,55 @@ The following responding methods are supported:
 - 409 render_conflict
 - 500 render_internal_server_error
 
+The Resource Presentation supports JSONP automatically. Which means ``GET /resources/id.json`` returns a standard JSON:
+```json
+{
+  "success": true,
+  "code":    "success",
+  "message": "成功",
+  "size":    1,
+  "errors":  {},
+  "collection":
+  [
+    {
+      "name": "My Name",
+      "links": []
+    }
+  ],
+  "meta":
+  {
+    "criteria":   null,
+    "request_id": "54fc3aa3-d062-4bad-b544-a08c7df5ef0c",
+    "timestamp":  1479114866
+  }
+}
+```
+If a callback parameter is given as ``GET /resources/id.json?callback=onResourceLoaded``, the following JSON is returned:
+```json
+onResourceLoaded(
+  {
+    "success": true,
+    "code":    "success",
+    "message": "成功",
+    "size":    1,
+    "errors":  {},
+    "collection":
+    [
+      {
+        "name": "My Name",
+        "links": []
+      }
+    ],
+    "meta":
+    {
+      "criteria":   null,
+      "request_id": "54fc3aa3-d062-4bad-b544-a08c7df5ef0c",
+      "timestamp":  1479114866
+    }
+  }
+);
+```
+
 ### Pagination
 
 ```ruby
