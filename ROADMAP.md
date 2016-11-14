@@ -37,3 +37,6 @@
 
 ## v1.7
 1. Improve the Resource Presentation concern to support the following status codes: 202 Accepted
+
+## v1.8
+1. Improve the Resource Presentation concern to support the JSONP
