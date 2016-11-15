@@ -1,2 +1,2 @@
-class Repre::Dosser::ApplicationJob < ActiveJob::Base
+class Repres::Dosser::ApplicationJob < ActiveJob::Base
 end
