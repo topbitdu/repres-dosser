@@ -1,4 +1,5 @@
 # rails generate repres:dosser:swagger administration --version 2
+require 'rails/generators'
 
 class Repres::Dosser::SwaggerGenerator < Rails::Generators::NamedBase
 
