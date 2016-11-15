@@ -1,4 +1,5 @@
 # rails generate repres:dosser:platform administration --version 2
+require 'rails/generators'
 
 class Repres::Dosser::PlatformGenerator < Rails::Generators::NamedBase
 
