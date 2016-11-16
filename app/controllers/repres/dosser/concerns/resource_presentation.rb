@@ -226,7 +226,8 @@ module Repres::Dosser::Concerns::ResourcePresentation
       result[:meta] = { criteria: @criteria, request_id: request.uuid, timestamp: Time.now.to_i }
       result[:meta][:pagination] = @pagination if @pagination.present?
       respond_to do |format|
-        format.json do render status: status, json: result, callback: params[:callback] end
+        format.js   do render status: status, js:   "/**/#{params[:callback]}(#{result.to_json});" end
+        format.json do render status: status, json: result end
         format.xml  do render status: status, xml:  result end
       end
     end
