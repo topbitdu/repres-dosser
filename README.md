@@ -77,8 +77,9 @@ The Resource Presentation supports JSONP automatically. Which means ``GET /resou
   }
 }
 ```
-If a callback parameter is given as ``GET /resources/id.json?callback=onResourceLoaded``, the following JSON is returned:
-```json
+
+If a callback parameter is given as ``GET /resources/id.js?callback=onResourceLoaded``, the following JSON is returned:
+```javascript
 onResourceLoaded(
   {
     "success": true,
