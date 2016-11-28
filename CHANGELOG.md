@@ -16,7 +16,7 @@
 1. Improved the Resource Presentation concern to support the following status codes: 204 No Content
 
 ## v1.4.1
-1. Improved the Ruby Gem Specification to support Rails v5.0
+1. Improved the Ruby Gem Specification to support [rails](https://github.com/rails/rails) v5.0
 
 ## v1.5
 1. Improved the Resource Presentation concern to add .meta.pagination attribute in the response
