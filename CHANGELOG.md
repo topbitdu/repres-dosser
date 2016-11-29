@@ -39,7 +39,7 @@
 1. Improved the Resource Presentation concern to support the following status codes: 202 Accepted
 
 ## v1.8
-1. Improve the Resource Presentation concern to support the JSONP
+1. Improved the Resource Presentation concern to support the JSONP
 
 ## v1.8.1
 1. Improve the Application job for namespace
