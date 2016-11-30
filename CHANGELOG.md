@@ -42,7 +42,7 @@
 1. Improved the Resource Presentation concern to support the JSONP
 
 ## v1.8.1
-1. Improve the Application job for namespace
+1. Improved the Application job for namespace
 2. Improve the Application mailer for namespace
 3. Improve the Application record for namespace
 4. Improve the Platform generator & the Swagger generator
