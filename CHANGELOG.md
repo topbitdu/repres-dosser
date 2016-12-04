@@ -45,7 +45,7 @@
 1. Improved the Application job for namespace
 2. Improved the Application mailer for namespace
 3. Improved the Application record for namespace
-4. Improve the Platform generator & the Swagger generator
+4. Improved the Platform generator & the Swagger generator
 
 ## v1.8.2
 1. Improve the Resource Presentation concern for the response MIME type of the JSONP
