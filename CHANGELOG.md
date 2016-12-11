@@ -48,7 +48,7 @@
 4. Improved the Platform generator & the Swagger generator
 
 ## v1.8.2
-1. Improve the Resource Presentation concern for the response MIME type of the JSONP
+1. Improved the Resource Presentation concern for the response MIME type of the JSONP
 
 ## v1.8.3
 1. Improve the Resource Presentation concern for the priorities of the response MIME type
