@@ -51,4 +51,4 @@
 1. Improved the Resource Presentation concern for the response MIME type of the JSONP
 
 ## v1.8.3
-1. Improve the Resource Presentation concern for the priorities of the response MIME type
+1. Improved the Resource Presentation concern for the priorities of the response MIME type
