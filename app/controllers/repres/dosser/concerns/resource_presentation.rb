@@ -1,3 +1,6 @@
+##
+# Resource Presentation 是 DOSSER 风格的资源表现逻辑的关注点。
+
 module Repres::Dosser::Concerns::ResourcePresentation
 
   extend ActiveSupport::Concern
