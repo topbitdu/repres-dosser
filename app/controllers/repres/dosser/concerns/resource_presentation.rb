@@ -1,5 +1,9 @@
 ##
 # Resource Presentation 是 DOSSER 风格的资源表现逻辑的关注点。
+# HTTP 状态码可参考以下链接：
+# https://httpstatuses.com/
+# http://www.restapitutorial.com/httpstatuscodes.html
+# http://guides.rubyonrails.org/layouts_and_rendering.html#the-status-option
 
 module Repres::Dosser::Concerns::ResourcePresentation
 
@@ -16,10 +20,6 @@ module Repres::Dosser::Concerns::ResourcePresentation
   included do |includer|
 
     attr_writer :criteria
-
-    # https://httpstatuses.com/
-    # http://www.restapitutorial.com/httpstatuscodes.html
-    # http://guides.rubyonrails.org/layouts_and_rendering.html#the-status-option
 
     # 200
     def render_ok(
