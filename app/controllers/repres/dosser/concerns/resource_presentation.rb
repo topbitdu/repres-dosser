@@ -21,7 +21,8 @@ module Repres::Dosser::Concerns::ResourcePresentation
 
     attr_writer :criteria
 
-    # 200
+    ##
+    # 返回 HTTP 状态码 200 。
     def render_ok(
       success:    true,
       code:       self.class::CODE_SUCCESS,
