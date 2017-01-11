@@ -1,6 +1,8 @@
 # Repres Dosser 领域特定语意表现引擎
 
+[![Documentation](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](http://www.rubydoc.info/gems/repres-dosser/frames)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](http://opensource.org/licenses/MIT)
+
 [![Gem Version](https://badge.fury.io/rb/repres-dosser.svg)](https://badge.fury.io/rb/repres-dosser)
 [![Dependency Status](https://gemnasium.com/badges/github.com/topbitdu/repres-dosser.svg)](https://gemnasium.com/github.com/topbitdu/repres-dosser)
 
