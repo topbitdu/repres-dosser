@@ -39,7 +39,8 @@ module Repres::Dosser::Concerns::ResourcePresentation
         errors:     errors
     end
 
-    # 201
+    ##
+    # 返回 HTTP 状态码 201 。
     def render_created(
       success:    true,
       code:       self.class::CODE_SUCCESS,
