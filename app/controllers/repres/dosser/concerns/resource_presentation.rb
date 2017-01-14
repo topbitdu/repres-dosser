@@ -57,7 +57,8 @@ module Repres::Dosser::Concerns::ResourcePresentation
         errors:     errors
     end
 
-    # 202
+    ##
+    # 返回 HTTP 状态码 202 。
     def render_accepted(
       success:    true,
       code:       self.class::CODE_SUCCESS,
