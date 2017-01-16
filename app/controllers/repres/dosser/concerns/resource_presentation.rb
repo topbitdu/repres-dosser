@@ -93,7 +93,8 @@ module Repres::Dosser::Concerns::ResourcePresentation
         errors:     errors
     end
 
-    # 400
+    ##
+    # 返回 HTTP 状态码 400 。
     def render_bad_request(
       success:    false,
       code:       self.class::CODE_FAILURE_WRONG_PARAMETER,
