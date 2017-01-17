@@ -111,7 +111,8 @@ module Repres::Dosser::Concerns::ResourcePresentation
         errors:     errors
     end
 
-    # 401
+    ##
+    # 返回 HTTP 状态码 401 。
     def render_unauthorized(
       success:    false,
       code:       self.class::CODE_FAILURE,
