@@ -129,7 +129,8 @@ module Repres::Dosser::Concerns::ResourcePresentation
         errors:     errors
     end
 
-    # 403 forbidden
+    ##
+    # 返回 HTTP 状态码 403 forbidden 。
     def render_forbidden(
       success:    false,
       code:       self.class::CODE_FAILURE_FORBIDDEN,
