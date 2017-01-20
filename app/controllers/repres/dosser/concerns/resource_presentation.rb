@@ -180,7 +180,8 @@ module Repres::Dosser::Concerns::ResourcePresentation
     end
 =end
 
-    # 409
+    ##
+    # 返回 HTTP 状态码 409 。
     def render_conflict(
       success:    false,
       code:       self.class::CODE_FAILURE_WRONG_STATE,
