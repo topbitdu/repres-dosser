@@ -198,7 +198,8 @@ module Repres::Dosser::Concerns::ResourcePresentation
         errors:     errors
     end
 
-    # 500
+    ##
+    # 返回 HTTP 状态码 500 。
     def render_internal_server_error(
       success:    false,
       code:       self.class::CODE_FAILURE,
