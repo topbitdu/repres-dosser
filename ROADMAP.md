@@ -52,3 +52,8 @@
 
 ## v1.8.3
 1. Improve the Resource Presentation concern for the priorities of the response MIME type
+
+## v1.9
+1. Models RSpec examples manifest
+2. Types RSpec examples manifest
+3. Validators RSpec examples manifest
