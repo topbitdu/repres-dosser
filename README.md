@@ -169,3 +169,18 @@ before insert the swagger_engine & the latest repres-dosser gem into the Gemfile
 config/initializers/swagger_engine.rb
 lib/swagger/administration_api_v2.json
 ```
+
+
+
+## RSpec examples
+
+```ruby
+# spec/models/unidom_spec.rb
+require 'repres/dosser/models_rspec'
+
+# spec/types/unidom_spec.rb
+require 'repres/dosser/types_rspec'
+
+# spec/validators/unidom_spec.rb
+require 'repres/dosser/validators_rspec'
+```
