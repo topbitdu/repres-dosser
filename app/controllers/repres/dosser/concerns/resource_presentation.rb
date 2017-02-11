@@ -76,7 +76,7 @@ module Repres::Dosser::Concerns::ResourcePresentation
     end
 
     ##
-    # 返回 HTTP 状态码 204 。
+    # 返回 HTTP 状态码 204 No Content 。
     def render_no_content(
       success:    true,
       code:       self.class::CODE_SUCCESS,
