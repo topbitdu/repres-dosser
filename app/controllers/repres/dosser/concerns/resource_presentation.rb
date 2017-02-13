@@ -40,7 +40,7 @@ module Repres::Dosser::Concerns::ResourcePresentation
     end
 
     ##
-    # 返回 HTTP 状态码 201 created 。
+    # 返回 HTTP 状态码 201 Created 。
     def render_created(
       success:    true,
       code:       self.class::CODE_SUCCESS,
