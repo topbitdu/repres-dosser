@@ -58,7 +58,7 @@ module Repres::Dosser::Concerns::ResourcePresentation
     end
 
     ##
-    # 返回 HTTP 状态码 202 accepted 。
+    # 返回 HTTP 状态码 202 Accepted 。
     def render_accepted(
       success:    true,
       code:       self.class::CODE_SUCCESS,
