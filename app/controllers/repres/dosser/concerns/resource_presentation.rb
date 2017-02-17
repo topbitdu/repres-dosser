@@ -112,7 +112,7 @@ module Repres::Dosser::Concerns::ResourcePresentation
     end
 
     ##
-    # 返回 HTTP 状态码 401 。
+    # 返回 HTTP 状态码 401 Unauthorized 。
     def render_unauthorized(
       success:    false,
       code:       self.class::CODE_FAILURE,
