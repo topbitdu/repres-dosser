@@ -148,7 +148,7 @@ module Repres::Dosser::Concerns::ResourcePresentation
     end
 
     ##
-    # 返回 HTTP 状态码 404 。
+    # 返回 HTTP 状态码 404 Not Found 。
     def render_not_found(
       success:    false,
       code:       self.class::CODE_FAILURE_NOT_FOUND,
