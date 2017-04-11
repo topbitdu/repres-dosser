@@ -216,6 +216,8 @@ module Repres::Dosser::Concerns::ResourcePresentation
         errors:     errors
     end
 
+    ##
+    # 根据参数，计算分页结果。
     def paginate(total_items: 0, per_page: 0, current_page: 1)
       total_items  = total_items.to_i
       per_page     = per_page.to_i
