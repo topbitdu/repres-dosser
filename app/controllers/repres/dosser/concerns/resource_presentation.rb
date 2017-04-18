@@ -237,6 +237,8 @@ module Repres::Dosser::Concerns::ResourcePresentation
 
     end
 
+    ##
+    # 按照给定的参数响应结果。此为内部方法。
     def respond_result(status, result)
       result[:meta] = { criteria: @criteria, request_id: request.uuid, timestamp: Time.now.to_i }
       result[:meta][:pagination] = @pagination if @pagination.present?
