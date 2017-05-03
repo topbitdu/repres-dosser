@@ -217,7 +217,10 @@ module Repres::Dosser::Concerns::ResourcePresentation
     end
 
     ##
-    # 根据参数，计算分页结果。
+    # 根据参数，计算分页结果。如：
+    # paginate total_items: 88, per_page: 10, current_page: 9
+    # 返回
+    # { total_items: 88, per_page: 10, current_page: 9, total_pages: 9, min_item_on_current_page: 80, max_item_on_current_page: 87, items_on_current_page: 8 }
     def paginate(total_items: 0, per_page: 0, current_page: 1)
       total_items  = total_items.to_i
       per_page     = per_page.to_i
